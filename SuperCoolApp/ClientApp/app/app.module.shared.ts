@@ -7,12 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+import { StudentsComponent } from './components/students/students.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        HomeComponent
+        HomeComponent,
+        StudentsComponent
     ],
     imports: [
         CommonModule,
@@ -21,6 +23,7 @@ import { HomeComponent } from './components/home/home.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
+            { path: 'students', component: StudentsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
