@@ -1,0 +1,15 @@
+{
+  "name": "graph-server",
+  "version": "1.0.0",
+  "description": "A graph server POC",
+  "main": "graphServer.js",
+  "dependencies": {
+    "neo4j-driver": "^1.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vincenzo Di Martino",
+  "license": "ISC"
+}
