@@ -1,0 +1,33 @@
+<html>
+<head>
+
+    <script src="jquery.js"></script> 
+
+    <script>
+
+        $.ajax({
+            url: 'http://localhost/api/students',
+            cache: false,
+            type: 'GET',
+            dataType: "json",
+            //data:  {"evento": evento, "ninja": 551 , "value":pres,"note": null, "gruppo": null , "valutazione": null},
+            success: function (data) {
+                if (data != "success") {
+                    alert(data);
+                }
+                else {
+                    alert("ricaricare la pagina per visualizzare i dati aggiornati");
+                }
+            }
+        });
+
+    </script>
+</head>
+<body>
+    <a href="http://localhost:5000/api/setup">setup</a>
+
+
+
+</body>
+
+</html>
