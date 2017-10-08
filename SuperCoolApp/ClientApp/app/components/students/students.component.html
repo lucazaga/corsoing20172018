@@ -1,0 +1,18 @@
+<h1>Students List</h1>
+
+<p *ngIf="!students"><em>Loading...</em></p>
+
+<table class='table' *ngIf="students">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of students">
+            <td>{{ student.name }}</td>
+            <td>{{ student.dateOfBirth }}</td>
+        </tr>
+    </tbody>
+</table>
