@@ -40,7 +40,7 @@ namespace ServiceAPI
 
                 using (var context = new StudentsDbContext())
                 {
-                    return Ok(await context.Students.ToListAsync());
+                    return Ok(context.Students.ToList());
                 }
             }
             finally
