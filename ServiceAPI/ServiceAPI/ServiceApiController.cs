@@ -80,7 +80,7 @@ namespace ServiceAPI
                 await context.SaveChangesAsync();
                 return Ok();
             }
-        }
+        }   
 
 
         [HttpDelete("students")]
@@ -89,8 +89,11 @@ namespace ServiceAPI
             using (var context = new StudentsDbContext())
             {
                 var student = await context.Students.FirstOrDefaultAsync(x => x.Id == id);
-                context.Students.Remove(student);
-                await context.SaveChangesAsync();
+                if (student != null)
+                {
+                    context.Students.Remove(student);
+                    await context.SaveChangesAsync();
+                }
                 return Ok();
 
 

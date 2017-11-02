@@ -10,33 +10,34 @@ namespace ServiceAPI
         static void Main(string[] args)
         {
 
-            using (var context = new StudentsDbContext())
-            {
-                // Create database
-                context.Database.EnsureCreated();
+            var host = new WebHostBuilder()
+               .UseKestrel()
+               .UseStartup<Startup>()
+               .Build();
 
-                Student s = new Student()
-                {
-                    Name = "Giovanni",
-                    DateOfBirth = new DateTime(2012, 1, 1),
-                };
-
-                context.Students.Add(s);
-
-                context.SaveChanges();
-            }
+            Task restService = host.RunAsync();
 
 
-            //var host = new WebHostBuilder()
-            //    .UseKestrel()
-            //    .UseStartup<Startup>()
-            //    .Build();
+            //using (var context = new StudentsDbContext())
+            //{
+            //    // Create database
+            //    context.Database.EnsureCreated();
 
-            //Task restService = host.RunAsync();
+            //    Student s = new Student()
+            //    {
+            //        Name = "Giovanni",
+            //        DateOfBirth = new DateTime(2012, 1, 1),
+            //    };
 
-            ////System.Diagnostics.Process.Start("chrome.exe", "http://localhost/netcoreapp2.0/corsoing/");
+            //    context.Students.Add(s);
+
+            //    context.SaveChanges();
+            //}
+
+
+            //System.Diagnostics.Process.Start("chrome.exe", "http://localhost/netcoreapp2.0/corsoing/");
             //System.Diagnostics.Process.Start("cmd", "/C start http://localhost/netcoreapp2.0/corsoing/");
-            //restService.Wait();
+            restService.Wait();
         }
     }
 }

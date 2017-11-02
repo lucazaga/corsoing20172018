@@ -1,0 +1,96 @@
+﻿.selected {
+    background-color: #CFD8DC !important;
+    color: white;
+}
+
+.student-home {
+    display:flex;
+}
+
+.students-list {
+    flex:1;
+    padding: 5px;
+}
+
+.students-list div {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    border-radius: 4px;
+}
+
+.students-list div.selected:hover {
+    background-color: #BBD8DC !important;
+    color: white;
+}
+
+.students-list div:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+}
+
+.students-list .text {
+    position: relative;
+    top: -3px;
+}
+
+.students-list .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #607D8B;
+    line-height: 1em;
+    position: relative;
+    height: 30px;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+}
+
+.student-detail {
+    flex: 1;
+    padding: 5px;
+}
+
+button {
+    font-family: Arial;
+    font-size: 16px;
+    margin: 2px;
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #cfd8dc;
+}
+
+button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+}
+
+#floating-button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #db4437;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px #666;
+    display: flex;
+}
+
+#floating-button span {
+    padding: 18px 0 0 9px;
+}

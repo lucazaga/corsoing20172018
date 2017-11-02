@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http.Headers;
+using System.IO;
+using System.Text;
 
 namespace SuperCoolApp.Controllers
 {
@@ -12,7 +15,7 @@ namespace SuperCoolApp.Controllers
     public class PassThroughApiController : Controller
     {
         private const string baseAddress = "http://localhost:5000/api/";
-        static HttpClient http = new HttpClient(new HttpClientHandler { UseCookies = false, });
+        static HttpClient http = new HttpClient(new HttpClientHandler { UseCookies = false, AllowAutoRedirect = false });
 
         /// <summary>
         /// Gets the specified URL.
@@ -58,27 +61,25 @@ namespace SuperCoolApp.Controllers
         {
             try
             {
-                //var serviceApiUri = new Uri(baseAddress);
-
                 string path = Request.Path.Value.Replace("/api/", "");
                 string pathAndQuery = path + Request.QueryString;
-              
-                var uri = new Uri(baseAddress+pathAndQuery);
+
+                var uri = new Uri(baseAddress + pathAndQuery);
 
                 HttpRequestMessage request = new HttpRequestMessage(method, uri);
 
-                //copy original headers
-                foreach(var header in Request.Headers)
+                if (method == HttpMethod.Put || method == HttpMethod.Post)
                 {
-                    request.Headers.Add(header.Key, header.Value.ToArray());
+                    StreamReader reader = new StreamReader(Request.Body);
+                    string text = reader.ReadToEnd();
+
+                    //request.Headers.Add("Content-Lenght", text.Length.ToString());
+                    request.Content = new StringContent(text);
+                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
                 }
 
-                //copy content
-                //if (method == HttpMethod.Put || method == HttpMethod.Post)
-                //  request.Content = Request.Body;
-
                 var httpResponse = await http.SendAsync(request);
-                if(httpResponse.IsSuccessStatusCode)
+                if (httpResponse.IsSuccessStatusCode)
                 {
                     var responseData = await httpResponse.Content.ReadAsStringAsync();
                     return Ok(Newtonsoft.Json.JsonConvert.DeserializeObject(responseData));
